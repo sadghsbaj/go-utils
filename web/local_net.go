@@ -1,10 +1,10 @@
-package hh
+package web
 
 import "fmt"
 import "net"
 import "errors"
 import "strings"
-import "ws-project/utils/ch"
+import "ws-project/utils/web"
 
 func GetLocalIp() (string, error) {
 	adresses, e := net.InterfaceAddrs()

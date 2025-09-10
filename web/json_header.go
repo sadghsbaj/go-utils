@@ -1,4 +1,4 @@
-package hh
+package web
 
 import "net/http"
 
