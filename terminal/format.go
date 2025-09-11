@@ -55,7 +55,11 @@ func Format(text, color string, bold, underline bool) (string, error) {
 	if colorCode, ok := colorMap[strings.ToLower(color)]; ok {
 		codes = append(codes, colorCode)
 	} else {
-		availableColors := sortMap(colorMap)
+		availableColors, e := sortMap(colorMap)
+		if e != nil {
+			return "", e
+		}
+
 		availableColorsString := strings.Join(availableColors, ", ")
 		return "", fmt.Errorf("Ungültige Farbe! Folgende Farben sind verfügbar:\n%s", availableColorsString)
 	}
@@ -72,15 +76,14 @@ func Format(text, color string, bold, underline bool) (string, error) {
 
 // Interne Hilfsfunktion für Format Terminal.
 // Erstellt eine sortierte Liste aller möglichen Farben, um diese für die Fehlermeldung ausgeben zu können.
-func sortMap(colorMap map[string]string) []string {
+func sortMap(colorMap map[string]string) ([]string, error) {
 	colorSlice := []KeyValue{}
 
 	// Für Jeden Map Eintrag Value in Int konvertieren und Slice aus Structs vom Type KeyValue erstellen
 	for k, v := range colorMap {
 		valueToInt, e := strconv.Atoi(v)
 		if e != nil {
-			fmt.Printf("Konnte Wert '%s' für Schlüssel '%s' nicht umwandeln, überspringe...\n", v, k)
-			continue
+			return nil, fmt.Errorf("interner fehler in colormap bei schlüssel '%s': %w", k, e)
 		}
 
 		colorSlice = append(colorSlice, KeyValue{Key: k, Value: valueToInt})
@@ -97,5 +100,5 @@ func sortMap(colorMap map[string]string) []string {
 		keySlice = append(keySlice, v.Key)
 	}
 
-	return keySlice
+	return keySlice, nil
 }
