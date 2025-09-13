@@ -6,7 +6,7 @@ import "strings"
 import "os"
 
 func RenderHtml(w http.ResponseWriter, filename string) error {
-	// Übergebenen Dateinamen an allen "." aufteilen um das angebenen Format zu erlangen
+	// Übergebenen Dateinamen an allen "." aufteilen um das angebene Format zu erlangen
 	parts := strings.Split(filename, ".")
 	format := parts[len(parts) - 1]
 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/sadghsbaj/go-utils/errorutils"
 	"github.com/sadghsbaj/go-utils/terminal"
 )
 
@@ -33,6 +34,5 @@ func passTest(t, c string, b, u bool) {
 // Es sollte eine Liste aller verfügbaren Farben ausgegeben werden.
 func failTest(t, c string, b, u bool) {
 	_, e := terminal.Format(t, c, b, u)
-
-	fmt.Printf("Fehler!\n%s\n\n", e)
+	if errorutils.Handler(e, "error") {}
 }
