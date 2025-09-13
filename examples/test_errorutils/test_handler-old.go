@@ -6,7 +6,7 @@ import (
 	"github.com/sadghsbaj/go-utils/errorutils"
 )
 
-func main() {
+func mainold() {
 	// Kein Fehler
 	e := noError()
 	if errorutils.Handler(e, errorutils.LevelError) {}

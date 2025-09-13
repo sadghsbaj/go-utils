@@ -17,7 +17,7 @@ const (
 // Handler prüft, ob ein Fehler vorliegt, und gibt ihn formatiert auf Stderr aus.
 // Er nimmt einen Fehler, einen Level ("warning", "error", "fatal")
 // und gibt 'true' zurück, wenn ein Fehler behandelt wurde.
-func Handler(e error, level string) bool {
+func HandlerOld(e error, level string) bool {
 	// Falls kein Fehler false zurückgeben
 	if e == nil {
 		return false
@@ -58,13 +58,13 @@ func Handler(e error, level string) bool {
 	}
 
 	// Funktion zur Ausgabe im Terminal aufrufen
-	printError(e, label, color)
+	printErrorOld(e, label, color)
 
 	// Wird nur erreicht wenn es einen Fehler gab daher true zurückgeben
 	return true
 }
 
-func printError(e error, label, color string) {
+func printErrorOld(e error, label, color string) {
 	// Level Anzeige formatieren
 	label, err := terminal.Format(label, color, true, false)
 	if err != nil {
